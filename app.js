@@ -1,7 +1,11 @@
 const { static } = require("express");
 const express = require("express");
+const bodyParser = require("body-parser");
 
 var app = express();
+
+app.use(bodyParser.json({}));
+app.use(bodyParser.urlencoded({extended:false}));
 
 const places = [
     {
@@ -30,6 +34,10 @@ app.use(express.static("public"));
 
 app.get("/", (req,res) =>{    
     res.json(places)
+})
+
+app.post("/",(req,res)=>{
+    res.send(req.body);
 })
 
 app.listen(3000, function(){
